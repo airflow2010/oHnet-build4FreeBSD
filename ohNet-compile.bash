@@ -1,14 +1,15 @@
 #!/usr/local/bin/bash
 
+WORKPATH=/usr/local/share/ohNet-build4FreeBSD
 OHNV=$1
 
-cd /usr/local/share/
+cd $WORKPATH/ohNet-ohNet_$OHNV
 
-#/usr/local/bin/git clone git@github.com:openhome/ohNet.git ohnet
-
-cd ohNet-ohNet_$OHNV
+read x
 
 /usr/bin/sed -i -- 's/-DPLATFORM_LINUX//g' Makefile
+
+read x
 
 /usr/local/bin/gmake tt freebsd=1 uset4=yes
 
@@ -49,4 +50,3 @@ cd ohnet-zip
 /usr/local/bin/zip ../ohnet.zip ./*
 cd ..
 
-scp ohnet.zip e54294@e54294-ssh.services.easyname.eu:html/apps/wordpress-32958/ohnet/
