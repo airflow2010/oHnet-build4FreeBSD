@@ -1,7 +1,9 @@
 #!/bin/bash
 
+INPUTPATH=/usr/local/share/ohNet-build4FreeBSD/minim-lib-zip/
+
 OHNV=$1
-OHNO="`find /mnt/SSD/jails/services_2/usr/local/share/minimserver/libext/ -name "ohnet*.zip"`"
+#OHNO="`find /mnt/SSD/jails/services_2/usr/local/share/minimserver/libext/ -name "ohnet*.zip"`"
 
 if [ $OHNV ]; then
 	echo orig lib: $OHNO
