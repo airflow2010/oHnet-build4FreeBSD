@@ -1,43 +1,50 @@
 #!/usr/local/bin/bash
 
 WORKPATH=/usr/local/share/ohNet-build4FreeBSD
-INPUTPATH=/usr/local/share/ohNet-build4FreeBSD/minim-lib-zip
+ZIPPATH=$WORKPATH/minim-lib-zip
 
-OHNO="`find $INPUTPATH -name "ohnet*.zip"`"
+OHNO="`find $ZIPPATH.orig -name "ohnet*.zip"`"
 REGEX=".*\(linux-intel\)-(.*).1.zip"
 
 if [[ $OHNO =~ $REGEX ]]
 	then 
-		echo Inputfile: $OHNO
-		echo Version: ${BASH_REMATCH[1]} 
 		OHNV=${BASH_REMATCH[1]}
+		echo Inputfile: $OHNO
+		echo Version:   $OHNV 
 fi
 
 
 if [ $OHNV ]; then
-	echo orig lib: $OHNO
 	echo compiling ohNet_$OHNV.tar.gz from github as replacement? 
 	read x 
 	/usr/local/bin/wget -P $WORKPATH https://github.com/openhome/ohNet/archive/ohNet_$OHNV.tar.gz
+	echo extract source code?
+	read x
 	tar -xvzf $WORKPATH/ohNet_$OHNV.tar.gz -C $WORKPATH
+	echo extract minimserver-lib?
 	read x
-	unzip $OHNO -d $WORKPATH/minim-lib-zip-extracted/
+	unzip $OHNO -d $ZIPPATH.orig.extracted 
 
-	exit
+	$WORKPATH/ohNet-compile.bash $OHNV
 
-	$WORKPATH/ohNet-compile.sh $OHNV
-
-	echo move libs to archive?
+	echo move new libs to new archive $ZIPPATH.freebsd.extracted?
 	read x
-	cp -av $OHNO /mnt/SSD/jails/build_1/usr/local/share/ /mnt/SSD/jails/build_1/usr/local/share/ohnet-$OHNV-orig.zip
-	cp -av /mnt/SSD/jails/build_1/usr/local/share/ohnet.zip /mnt/SSD/jails/build_1/usr/local/share/ohnet-$OHNV-freebsd.zip
+	cp -av $ZIPPATH.orig.extracted $ZIPPATH.freebsd.extracted
+	find $WORKPATH/ohNet-ohNet_$OHNV -name libohNet.so -exec mv {} $ZIPPATH.freebsd.extracted/ \;
+	find $WORKPATH/ohNet-ohNet_$OHNV -name libohNetJni.so -exec mv {} $ZIPPATH.freebsd.extracted/ \;
+	echo "Output:\n"
+	ls -lsha $ZIPPATH.freebsd.extracted
 
-	echo remove working-dirs?
+	echo compress new libs to new archive $ZIPPATH.freebsd
 	read x
-	rm -rf /mnt/SSD/jails/build_1/usr/local/share/ohNet-ohNet_$OHNV/
-	rm -rf /mnt/SSD/jails/build_1/usr/local/share/ohnet-zip/
-	rm -rf /mnt/SSD/jails/build_1/usr/local/share/ohnet.zip
-	rm -rf $WORKPATH/*.zip
+	mkdir -p $ZIPPATH.freebsd
+	/usr/local/bin/zip $ZIPPATH.freebsd/ohnet.zip $ZIPPATH.freebsd.extracted/*
+
+	echo remove temporary working files?
+	read x
+	rm -rf $WORKPATH/ohNet_$OHNV.tar.gz
+	rm -rf $WORKPATH/ohNet-ohNet_$OHNV/
+	rm -rf $ZIPPATH.*
 else
 echo cannot compute - no input version detected 
 fi
