@@ -38,7 +38,7 @@ if [ $OHNV ]; then
 	echo compress new libs to new archive $ZIPPATH.freebsd
 	read x
 	mkdir -p $ZIPPATH.freebsd
-	/usr/local/bin/zip $ZIPPATH.freebsd/ohnet.zip $ZIPPATH.freebsd.extracted/*
+	/usr/local/bin/zip -j $ZIPPATH.freebsd/ohnet.zip $ZIPPATH.freebsd.extracted/*
 
 	echo remove temporary working files?
 	read x
