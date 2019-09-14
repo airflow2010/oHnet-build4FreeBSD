@@ -17,3 +17,8 @@ wrapper script, prepares for compilation of libraries
 
 * makes necessary changes to the sourcecode of ohNet-lib to make it compilable on FreeBSD
 * compiles the code
+
+---
+#### testing
+
+testing of the compiled libs can be done with `python AllTests.py --incremental --full --native`
