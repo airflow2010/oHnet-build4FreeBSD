@@ -23,6 +23,7 @@ if [ $OHNV ]; then
 	tar -xvzf $WORKPATH/ohNet_$OHNV.tar.gz -C $WORKPATH
 	echo extract minimserver-lib?
 	read x
+	rm -rf $ZIPPATH.orig.extracted
 	unzip $OHNO -d $ZIPPATH.orig.extracted 
 	cp -av $ZIPPATH.orig.extracted $ZIPPATH.freebsd.extracted
 
@@ -34,15 +35,12 @@ if [ $OHNV ]; then
 	echo compress new libs to new archive $ZIPPATH.freebsd
 	read x
 	mkdir -p $ZIPPATH.freebsd
-	/usr/local/bin/zip -j $ZIPPATH.freebsd/ohnet.zip $ZIPPATH.freebsd.extracted/*
+	/usr/local/bin/zip -FSj $ZIPPATH.freebsd/ohnet.zip $ZIPPATH.freebsd.extracted/*
 
 	echo remove temporary working files?
 	read x
 	rm -rf $WORKPATH/ohNet_$OHNV.tar.gz
 	rm -rf $WORKPATH/ohNet-ohNet_$OHNV/
-	rm -rf $ZIPPATH.*
 else
 echo cannot compute - no input version detected 
 fi
-
-
