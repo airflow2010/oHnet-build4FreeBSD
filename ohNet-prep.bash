@@ -24,14 +24,10 @@ if [ $OHNV ]; then
 	echo extract minimserver-lib?
 	read x
 	unzip $OHNO -d $ZIPPATH.orig.extracted 
+	cp -av $ZIPPATH.orig.extracted $ZIPPATH.freebsd.extracted
 
 	$WORKPATH/ohNet-compile.bash $OHNV
 
-	echo move new libs to new archive $ZIPPATH.freebsd.extracted?
-	read x
-	cp -av $ZIPPATH.orig.extracted $ZIPPATH.freebsd.extracted
-	find $WORKPATH/ohNet-ohNet_$OHNV -name libohNet.so -exec mv {} $ZIPPATH.freebsd.extracted/ \;
-	find $WORKPATH/ohNet-ohNet_$OHNV -name libohNetJni.so -exec mv {} $ZIPPATH.freebsd.extracted/ \;
 	echo "Output:\n"
 	ls -lsha $ZIPPATH.freebsd.extracted
 
