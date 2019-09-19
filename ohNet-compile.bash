@@ -23,17 +23,17 @@ echo setting environment variables
 export JAVA_HOME=/usr/local/openjdk8
 export libjvm_dir=/usr/local/openjdk8/jre/lib/amd64/server
 
-#echo start compilation of ohNet version $OHNV 32bit?
-#read x
+echo start compilation of ohNet version $OHNV 32bit?
+read x
 
-#export CROSS_COMPILE_CFLAGS=-m32
-#export CROSS_COMPILE_LINKFLAGS=-m32
-#/usr/local/bin/gmake tt freebsd=1 uset4=yes
-#/usr/local/bin/gmake all nocpp11=yes freebsd=1
-#/usr/local/bin/gmake nocpp11=yes ohNetJni
+export CROSS_COMPILE_CFLAGS=-m32
+export CROSS_COMPILE_LINKFLAGS=-m32
+/usr/local/bin/gmake tt freebsd=1 uset4=yes
+/usr/local/bin/gmake all nocpp11=yes freebsd=1
+/usr/local/bin/gmake nocpp11=yes ohNetJni
 
-#find $WORKPATH/ohNet-ohNet_$OHNV -name libohNet.so -exec mv {} $ZIPPATH.freebsd.extracted/libohNet.so.32 \;
-#find $WORKPATH/ohNet-ohNet_$OHNV -name libohNetJni.so -exec mv {} $ZIPPATH.freebsd.extracted/libohNetJni.so.32 \;
+find $WORKPATH/ohNet-ohNet_$OHNV -name libohNet.so -exec mv {} $ZIPPATH.freebsd.extracted/libohNet.so.32 \;
+find $WORKPATH/ohNet-ohNet_$OHNV -name libohNetJni.so -exec mv {} $ZIPPATH.freebsd.extracted/libohNetJni.so.32 \;
 
 echo start compilation of ohNet version $OHNV 64bit?
 read x
