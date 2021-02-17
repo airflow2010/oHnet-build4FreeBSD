@@ -4,7 +4,7 @@ WORKPATH=/usr/local/share/ohNet-build4FreeBSD
 ZIPPATH=$WORKPATH/minim-lib-zip
 
 OHNO="`find $ZIPPATH.orig -name "ohnet*.zip"`"
-REGEX=".*\(linux-intel\)-(.*).1.zip"
+REGEX=".*\(linux-intel\)-(.*).zip"
 
 if [[ $OHNO =~ $REGEX ]]
 	then 
