@@ -25,7 +25,7 @@ if [ $OHNV ]; then
 	read x
 	rm -rf $ZIPPATH.orig.extracted
 	unzip $OHNO -d $ZIPPATH.orig.extracted 
-	cp -av $ZIPPATH.orig.extracted $ZIPPATH.freebsd.extracted
+	cp -av $ZIPPATH.orig.extracted/ $ZIPPATH.freebsd.extracted
 
 	$WORKPATH/ohNet-compile.bash $OHNV
 
@@ -41,6 +41,9 @@ if [ $OHNV ]; then
 	read x
 	rm -rf $WORKPATH/ohNet_$OHNV.tar.gz
 	rm -rf $WORKPATH/ohNet-ohNet_$OHNV/
+
+	echo if everything worked fine, copy result to public repository
+	echo \<assisted mechanism needed\> 
 else
 echo cannot compute - no input version detected 
 fi
