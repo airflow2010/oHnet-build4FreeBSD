@@ -10,9 +10,8 @@ cd $WORKPATH/ohNet-ohNet_$OHNV
 
 echo modification of source code
 
-/usr/bin/sed -i -- 's/-DPLATFORM_LINUX//g' Makefile
-/usr/bin/sed -i -- 's/#include <malloc.h>//g' OpenHome/Net/Bindings/Java/*.c
-/usr/bin/sed -i -- 's/#include <malloc.h>//g' OpenHome/Net/Bindings/Java/*.h
+/usr/bin/sed -i -- 's/-Werror//g' Makefile
+/usr/bin/sed -i -- '1320s/$/ \&\& \!defined(PLATFORM_FREEBSD)/' Os/Posix/Os.c
 
 echo copying jni_md.h
 
