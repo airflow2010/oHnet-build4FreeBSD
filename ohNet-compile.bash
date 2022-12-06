@@ -11,16 +11,18 @@ cd $WORKPATH/ohNet-ohNet_$OHNV
 echo modification of source code
 
 /usr/bin/sed -i -- 's/-Werror//g' Makefile
-/usr/bin/sed -i -- '1503s/$/ \&\& \!defined(PLATFORM_FREEBSD)/' Os/Posix/Os.c
+/usr/bin/sed -i -- '1798s/$/ \&\& \!defined(PLATFORM_FREEBSD)/' Os/Posix/Os.c
+/usr/bin/sed -i -- 's/IPV6_ADD_MEMBERSHIP/IP_ADD_MEMBERSHIP/g' Os/Posix/Os.c
+/usr/bin/sed -i -- 's/IPV6_DROP_MEMBERSHIP/IP_DROP_MEMBERSHIP/g' Os/Posix/Os.c
 
 echo copying jni_md.h
 
-cp -av /usr/local/openjdk8/include/freebsd/jni_md.h /usr/local/openjdk8/include/
+cp -av /usr/local/openjdk17/include/freebsd/jni_md.h /usr/local/openjdk17/include/
 
 echo setting environment variables
 
-export JAVA_HOME=/usr/local/openjdk8
-export libjvm_dir=/usr/local/openjdk8/jre/lib/amd64/server
+export JAVA_HOME=/usr/local/openjdk17
+export libjvm_dir=/usr/local/openjdk17/lib/server
 
 echo start compilation of ohNet version $OHNV 32bit?
 read x
