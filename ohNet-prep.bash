@@ -43,7 +43,8 @@ if [ $OHNV ]; then
 	rm -rf $WORKPATH/ohNet-ohNet_$OHNV/
 
 	echo if everything worked fine, copy result to public repository
-	echo \<assisted mechanism needed\> 
+	echo \<assisted mechanism needed\>
+	echo scp minim-lib-zip.freebsd/ohnet\(linux-intel\)-1.33.4785.zip e54294@e54294-ssh.services.easyname.eu:html/apps/wordpress-168816/ohnet/ 
 else
 echo cannot compute - no input version detected 
 fi
